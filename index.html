@@ -1,25 +1,1571 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Assotech World — Intelligence Dashboard</title>
-    <meta name="description" content="Assotech World — Intelligence Dashboard — built on Replit. Update this description to reflect the app." />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Assotech World — Intelligence Dashboard" />
-    <meta property="og:description" content="Assotech World — Intelligence Dashboard — built on Replit. Update this description to reflect the app." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Assotech World — Intelligence Dashboard" />
-    <meta name="twitter:description" content="Assotech World — Intelligence Dashboard — built on Replit. Update this description to reflect the app." />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/assets/index-DMLGwoEN.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BSYwhr-H.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assotech World — Marketing & Financial Intelligence</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0C0E12;
+  --ink2: #13161C;
+  --ink3: #1A1F28;
+  --ink4: #222836;
+  --ink5: #2C3444;
+  --gold: #D4A843;
+  --gold2: #F0C96A;
+  --gold3: #A07B28;
+  --cream: #EDE8DF;
+  --cream2: rgba(237,232,223,0.65);
+  --cream3: rgba(237,232,223,0.35);
+  --cream4: rgba(237,232,223,0.15);
+  --green: #3EBF82;
+  --green2: rgba(62,191,130,0.15);
+  --red: #E8534A;
+  --red2: rgba(232,83,74,0.15);
+  --blue: #4E9FD8;
+  --blue2: rgba(78,159,216,0.15);
+  --orange: #E8943A;
+  --orange2: rgba(232,148,58,0.15);
+  --purple: #9B6DD8;
+  --purple2: rgba(155,109,216,0.15);
+  --border: rgba(212,168,67,0.14);
+  --border2: rgba(237,232,223,0.07);
+  --r: 3px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content:'';
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 70% 45% at 15% -5%, rgba(212,168,67,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 105%, rgba(78,159,216,0.04) 0%, transparent 55%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Ccircle cx='30' cy='30' r='0.4' fill='rgba(237,232,223,0.03)'/%3E%3C/svg%3E");
+}
+
+/* ═══ HEADER ═══ */
+header {
+  position: sticky; top:0; z-index:200;
+  height:62px;
+  background: rgba(12,14,18,0.94);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 0 28px;
+}
+.logo {
+  display:flex; align-items:center; gap:13px;
+}
+.logo-diamond {
+  width:34px; height:34px;
+  border:1.5px solid var(--gold);
+  transform:rotate(45deg);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.logo-diamond span {
+  transform:rotate(-45deg);
+  font-family:'Playfair Display',serif;
+  font-size:13px; font-weight:700;
+  color:var(--gold); letter-spacing:0.03em;
+}
+.logo-txt h1 {
+  font-family:'Playfair Display',serif;
+  font-size:17px; font-weight:400;
+  letter-spacing:0.14em;
+  color:var(--cream);
+}
+.logo-txt p {
+  font-size:9px; letter-spacing:0.26em;
+  text-transform:uppercase; color:var(--gold);
+  margin-top:1px; font-weight:500;
+}
+.header-r {
+  display:flex; align-items:center; gap:16px;
+}
+.live-pill {
+  display:flex; align-items:center; gap:6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:0.1em;
+  color:var(--green); text-transform:uppercase;
+}
+.pulse-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--green);
+  animation:blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
+.tag {
+  font-size:10px; letter-spacing:0.07em;
+  color:var(--cream3); padding:4px 11px;
+  border:1px solid var(--border2); border-radius:2px;
+}
+
+/* ═══ NAV ═══ */
+.nav {
+  display:flex; gap:0;
+  background:var(--ink2);
+  border-bottom:1px solid var(--border2);
+  padding:0 28px;
+  overflow-x:auto; scrollbar-width:none;
+  position:sticky; top:62px; z-index:190;
+}
+.nav::-webkit-scrollbar { display:none; }
+.nav-btn {
+  padding:13px 20px;
+  background:none; border:none;
+  border-bottom:2px solid transparent;
+  color:var(--cream3);
+  font-family:'Outfit',sans-serif;
+  font-size:11px; font-weight:400;
+  letter-spacing:0.12em; text-transform:uppercase;
+  cursor:pointer; white-space:nowrap;
+  transition:all 0.2s;
+}
+.nav-btn:hover { color:var(--cream2); }
+.nav-btn.active {
+  color:var(--gold);
+  border-bottom-color:var(--gold);
+  font-weight:600;
+}
+
+/* ═══ MAIN LAYOUT ═══ */
+main {
+  position:relative; z-index:1;
+  padding:28px 28px 60px;
+  max-width:1560px; margin:0 auto;
+}
+.panel { display:none; animation:fadein 0.3s ease; }
+.panel.active { display:block; }
+@keyframes fadein { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+/* ═══ SECTION HEAD ═══ */
+.sec-head {
+  display:flex; align-items:flex-end;
+  justify-content:space-between;
+  margin-bottom:24px;
+}
+.sec-ttl h2 {
+  font-family:'Playfair Display',serif;
+  font-size:28px; font-weight:400;
+  letter-spacing:0.04em; line-height:1.1;
+}
+.sec-ttl p {
+  font-size:11px; color:var(--cream3);
+  letter-spacing:0.08em; margin-top:4px;
+}
+.sec-period {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:var(--gold);
+  letter-spacing:0.1em; text-transform:uppercase;
+}
+
+/* ═══ KPI GRID ═══ */
+.kpis {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px,1fr));
+  gap:14px; margin-bottom:22px;
+}
+.kpi {
+  background:var(--ink3);
+  border:1px solid var(--border2);
+  border-left:3px solid var(--gold3);
+  padding:18px 18px 15px;
+  position:relative; overflow:hidden;
+  transition:border-color 0.2s, transform 0.2s;
+  border-radius:var(--r);
+}
+.kpi:hover { border-left-color:var(--gold); transform:translateY(-2px); }
+.kpi.g { border-left-color:var(--green); }
+.kpi.g:hover { border-left-color:var(--green); }
+.kpi.b { border-left-color:var(--blue); }
+.kpi.b:hover { border-left-color:var(--blue); }
+.kpi.r { border-left-color:var(--red); }
+.kpi.r:hover { border-left-color:var(--red); }
+.kpi.o { border-left-color:var(--orange); }
+.kpi.o:hover { border-left-color:var(--orange); }
+.kpi.p { border-left-color:var(--purple); }
+.kpi.p:hover { border-left-color:var(--purple); }
+.kpi-lbl {
+  font-size:9px; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--cream3);
+  margin-bottom:9px;
+}
+.kpi-val {
+  font-family:'JetBrains Mono',monospace;
+  font-size:24px; font-weight:700;
+  color:var(--cream); line-height:1;
+  margin-bottom:7px;
+}
+.kpi-note {
+  font-size:10px; color:var(--cream3);
+  display:flex; align-items:center; gap:5px;
+  line-height:1.4;
+}
+.up { color:var(--green); font-weight:600; }
+.dn { color:var(--red); font-weight:600; }
+.nt { color:var(--gold); font-weight:600; }
+
+/* ═══ GRIDS ═══ */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-bottom:18px; }
+.g21 { display:grid; grid-template-columns:2fr 1fr; gap:18px; margin-bottom:18px; }
+.g12 { display:grid; grid-template-columns:1fr 2fr; gap:18px; margin-bottom:18px; }
+@media(max-width:1080px) { .g2,.g3,.g21,.g12 { grid-template-columns:1fr; } }
+
+/* ═══ CARD ═══ */
+.card {
+  background:var(--ink3);
+  border:1px solid var(--border2);
+  padding:22px;
+  border-radius:var(--r);
+}
+.card-t {
+  font-size:10px; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--gold);
+  margin-bottom:18px;
+  display:flex; align-items:center; gap:8px;
+}
+.card-t::after { content:''; flex:1; height:1px; background:var(--border); }
+.cw { position:relative; height:255px; }
+.cw-sm { position:relative; height:195px; }
+.cw-lg { position:relative; height:300px; }
+.cw-xl { position:relative; height:340px; }
+
+/* ═══ TABLE ═══ */
+.tbl-wrap { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:11px; }
+th {
+  text-align:left; padding:8px 11px;
+  font-size:9px; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--cream3);
+  border-bottom:1px solid var(--border);
+  font-weight:400; white-space:nowrap;
+}
+td {
+  padding:9px 11px;
+  border-bottom:1px solid var(--border2);
+  color:var(--cream);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px; white-space:nowrap;
+}
+tr:hover td { background:rgba(212,168,67,0.03); }
+tr:last-child td { border-bottom:none; }
+.total-row td { border-top:2px solid var(--border); color:var(--gold); font-weight:700; }
+.badge {
+  display:inline-block; padding:2px 8px;
+  border-radius:2px; font-size:9px;
+  letter-spacing:0.08em; font-family:'Outfit',sans-serif;
+  font-weight:600; text-transform:uppercase;
+}
+.b-g { background:var(--green2); color:var(--green); }
+.b-r { background:var(--red2); color:var(--red); }
+.b-o { background:var(--orange2); color:var(--orange); }
+.b-gold { background:rgba(212,168,67,0.15); color:var(--gold2); }
+.b-b { background:var(--blue2); color:var(--blue); }
+.b-p { background:var(--purple2); color:var(--purple); }
+
+/* ═══ PROGRESS BAR ═══ */
+.pb-wrap { margin-bottom:14px; }
+.pb-top { display:flex; justify-content:space-between; font-size:11px; color:var(--cream3); margin-bottom:5px; }
+.pb-val { color:var(--cream); font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; }
+.pb-track { height:4px; background:var(--ink5); border-radius:2px; overflow:hidden; }
+.pb-fill { height:100%; border-radius:2px; transition:width 1.2s cubic-bezier(.16,1,.3,1); }
+
+/* ═══ FUNNEL ═══ */
+.fstep {
+  display:flex; align-items:center; gap:14px;
+  padding:11px 14px; margin-bottom:7px;
+  background:var(--ink4); border-left:3px solid;
+  border-radius:0 var(--r) var(--r) 0;
+  transition:transform 0.2s;
+}
+.fstep:hover { transform:translateX(4px); }
+.fn { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; min-width:60px; }
+.fl { font-size:11px; color:var(--cream3); flex:1; line-height:1.4; }
+.fp { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--cream3); }
+
+/* ═══ SV SECTION ═══ */
+.sv-card {
+  background:var(--ink3); border:1px solid var(--border2);
+  padding:20px; border-radius:var(--r);
+  display:flex; gap:14px; margin-bottom:10px;
+  transition:transform 0.2s, border-color 0.2s;
+}
+.sv-card:hover { transform:translateX(4px); border-color:var(--border); }
+.sv-avatar {
+  width:40px; height:40px; border-radius:50%;
+  background:linear-gradient(135deg, var(--ink5), var(--ink4));
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:15px; color:var(--gold); flex-shrink:0;
+}
+.sv-info h4 { font-size:13px; font-weight:500; margin-bottom:3px; }
+.sv-info p { font-size:10px; color:var(--cream3); line-height:1.5; }
+.sv-date {
+  margin-left:auto; text-align:right; flex-shrink:0;
+  font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold);
+}
+
+/* ═══ FORECAST HERO ═══ */
+.fhero {
+  background:linear-gradient(135deg, rgba(212,168,67,0.09) 0%, transparent 55%);
+  border:1px solid var(--border);
+  padding:28px 32px; margin-bottom:20px;
+  display:grid; grid-template-columns:1fr auto;
+  gap:28px; align-items:center;
+  border-radius:var(--r);
+}
+@media(max-width:768px) { .fhero { grid-template-columns:1fr; } }
+.fhero-big {
+  font-family:'JetBrains Mono',monospace;
+  font-size:52px; font-weight:700;
+  color:var(--gold); line-height:1;
+}
+.fhero-lbl {
+  font-size:10px; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--cream3); margin-top:8px;
+}
+.fhero-sub {
+  display:flex; gap:24px; margin-top:18px;
+  flex-wrap:wrap;
+}
+.fhero-metric { }
+.fhero-metric .ml { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--cream4); }
+.fhero-metric .mv {
+  font-family:'JetBrains Mono',monospace;
+  font-size:19px; color:var(--cream); font-weight:700; margin-top:3px;
+}
+.fparams { display:flex; flex-direction:column; gap:9px; min-width:250px; }
+.fparam {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:9px 13px; background:var(--ink4);
+  border:1px solid var(--border2);
+  border-radius:var(--r);
+}
+.fparam-l { font-size:10px; color:var(--cream3); letter-spacing:0.05em; }
+.fparam-v {
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px; color:var(--gold2); font-weight:700;
+}
+
+/* ═══ CALCULATOR ═══ */
+.calc-row {
+  display:flex; align-items:center; gap:10px; margin-bottom:13px;
+}
+.calc-row label {
+  font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--cream3); min-width:155px;
+}
+.calc-row input {
+  background:var(--ink4); border:1px solid var(--border);
+  color:var(--cream); padding:8px 13px;
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  width:165px; outline:none; border-radius:var(--r);
+  transition:border-color 0.2s;
+}
+.calc-row input:focus { border-color:var(--gold); }
+.calc-btn {
+  padding:10px 22px; background:var(--gold);
+  border:none; color:var(--ink); font-family:'Outfit',sans-serif;
+  font-size:11px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; cursor:pointer;
+  border-radius:var(--r);
+  transition:background 0.2s, transform 0.1s;
+}
+.calc-btn:hover { background:var(--gold2); transform:translateY(-1px); }
+.calc-output {
+  background:var(--ink4); border:1px solid var(--border);
+  padding:20px; border-radius:var(--r);
+}
+.co-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:9px 0; border-bottom:1px solid var(--border2);
+  font-size:11px;
+}
+.co-row:last-child { border-bottom:none; }
+.co-lbl { color:var(--cream3); }
+.co-val {
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px; font-weight:700;
+}
+
+/* ═══ EVENT CARDS ═══ */
+.ev-card {
+  background:var(--ink3); border:1px solid var(--border);
+  border-radius:var(--r);
+  display:flex; gap:0; margin-bottom:14px;
+  overflow:hidden; transition:transform 0.2s;
+}
+.ev-card:hover { transform:translateX(4px); }
+.ev-bar { width:5px; background:var(--gold); flex-shrink:0; }
+.ev-bar.blue-bar { background:var(--blue); }
+.ev-date {
+  padding:20px 18px; background:var(--ink4);
+  text-align:center; min-width:70px; flex-shrink:0;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.ev-mo { font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream3); margin-bottom:4px; }
+.ev-day { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:700; color:var(--gold); line-height:1; }
+.ev-body { padding:18px 22px; flex:1; }
+.ev-body h3 { font-size:15px; font-weight:500; margin-bottom:6px; }
+.ev-body p { font-size:11px; color:var(--cream3); line-height:1.7; }
+.ev-tags { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+.ev-metrics {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:10px; margin-top:14px;
+}
+.ev-metric { background:var(--ink5); padding:10px 12px; border-radius:var(--r); }
+.ev-ml { font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--cream4); }
+.ev-mv { font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700; color:var(--gold); margin-top:3px; }
+
+/* ═══ RECOMMENDATIONS ═══ */
+.rec-card {
+  padding:14px 16px; background:var(--ink4);
+  border-left:3px solid var(--gold3);
+  margin-bottom:10px; border-radius:0 var(--r) var(--r) 0;
+}
+.rec-card h4 { font-size:12px; font-weight:600; margin-bottom:4px; }
+.rec-card p { font-size:11px; color:var(--cream3); line-height:1.6; }
+
+/* ═══ DATA NOTE ═══ */
+.dnote {
+  font-size:9px; letter-spacing:0.07em;
+  color:var(--cream4); margin-top:10px;
+  padding-top:10px; border-top:1px solid var(--border2);
+}
+
+/* ═══ SENSITIVITY TABLE ═══ */
+.sens-hi { color:var(--green); font-weight:700; }
+.sens-base { color:var(--gold); font-weight:700; }
+.sens-row-highlight { background:rgba(212,168,67,0.04); }
+
+/* ═══ WATERMARK ═══ */
+.wm {
+  position:fixed; bottom:16px; right:20px;
+  font-family:'JetBrains Mono',monospace; font-size:9px;
+  letter-spacing:0.15em; color:var(--cream4);
+  text-transform:uppercase; z-index:0;
+  pointer-events:none;
+}
+
+/* ═══ DIVIDER ═══ */
+.div { height:1px; background:var(--border2); margin:18px 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-diamond"><span>AW</span></div>
+    <div class="logo-txt">
+      <h1>ASSOTECH WORLD</h1>
+      <p>Marketing &amp; Financial Intelligence — Avenue 07</p>
+    </div>
+  </div>
+  <div class="header-r">
+    <div class="live-pill"><div class="pulse-dot"></div>Live Dashboard</div>
+    <span class="tag">Assotech Limited · Bhubaneswar</span>
+    <span class="tag" id="hdr-date"></span>
+  </div>
+</header>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="switchTab('overview',this)">📊 Overview</button>
+  <button class="nav-btn" onclick="switchTab('sv',this)">🏠 Site Visits</button>
+  <button class="nav-btn" onclick="switchTab('leads',this)">🎯 Lead Analytics</button>
+  <button class="nav-btn" onclick="switchTab('campaigns',this)">📣 Campaigns</button>
+  <button class="nav-btn" onclick="switchTab('financial',this)">💰 Financial Model</button>
+  <button class="nav-btn" onclick="switchTab('forecast',this)">📈 Forecast</button>
+  <button class="nav-btn" onclick="switchTab('events',this)">🗓 Upcoming Campaigns</button>
+</nav>
+
+<main>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║              OVERVIEW                   ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="panel active" id="tab-overview">
+  <div class="sec-head">
+    <div class="sec-ttl">
+      <h2>Executive Overview</h2>
+      <p>Assotech World Avenue 07 · Feb–Apr 2026 · Full Quarter Performance</p>
+    </div>
+    <span class="sec-period">Q1 FY2026 · 3-Month Review</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-lbl">Total Ad Spend</div>
+      <div class="kpi-val">₹7.11L</div>
+      <div class="kpi-note">₹3.14L Feb · ₹1.85L Mar · ₹2.12L Apr</div>
+    </div>
+    <div class="kpi g">
+      <div class="kpi-lbl">Total Revenue</div>
+      <div class="kpi-val">₹2.98Cr</div>
+      <div class="kpi-note"><span class="up">↑</span> 2 bookings closed in April</div>
+    </div>
+    <div class="kpi b">
+      <div class="kpi-lbl">Overall ROAS</div>
+      <div class="kpi-val">41.88x</div>
+      <div class="kpi-note">Apr ROAS: <span class="up">140.31x</span></div>
+    </div>
+    <div class="kpi o">
+      <div class="kpi-lbl">Total Leads</div>
+      <div class="kpi-val">435</div>
+      <div class="kpi-note">Feb 176 · Mar 112 · Apr 147</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">Site Visits Done</div>
+      <div class="kpi-val">15</div>
+      <div class="kpi-note">Feb 5 · Mar 6 · Apr 4 <span class="nt">+1 Scheduled</span></div>
+    </div>
+    <div class="kpi p">
+      <div class="kpi-lbl">Qualified Leads</div>
+      <div class="kpi-val">17</div>
+      <div class="kpi-note">Qualification rate: <span class="nt">3.9%</span></div>
+    </div>
+    <div class="kpi r">
+      <div class="kpi-lbl">Cost Per Lead</div>
+      <div class="kpi-val">₹1,635</div>
+      <div class="kpi-note">Feb ₹1,782 · Mar ₹1,655 · Apr ₹1,445</div>
+    </div>
+    <div class="kpi g">
+      <div class="kpi-lbl">Cost Per Booking</div>
+      <div class="kpi-val">₹3.56L</div>
+      <div class="kpi-note">Avg unit value: <span class="up">₹1.49 Cr</span></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">Monthly Ad Spend vs Revenue</div>
+      <div class="cw"><canvas id="c-spend-rev"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Lead Pipeline by Month</div>
+      <div class="cw"><canvas id="c-leads-pipe"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card">
+      <div class="card-t">Platform Spend Split</div>
+      <div class="cw-sm"><canvas id="c-platform-pie"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Lead Source Distribution</div>
+      <div class="cw-sm"><canvas id="c-source-donut"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Conversion Funnel</div>
+      <div style="margin-top:6px;">
+        <div class="fstep" style="border-left-color:var(--blue)">
+          <div class="fn" style="color:var(--blue)">435</div>
+          <div class="fl">Total Leads Generated</div>
+          <div class="fp">100%</div>
+        </div>
+        <div class="fstep" style="border-left-color:var(--orange)">
+          <div class="fn" style="color:var(--orange)">51</div>
+          <div class="fl">Open / Active Leads</div>
+          <div class="fp">11.7%</div>
+        </div>
+        <div class="fstep" style="border-left-color:var(--gold)">
+          <div class="fn" style="color:var(--gold)">15</div>
+          <div class="fl">Site Visits Done (SV)</div>
+          <div class="fp">3.45%</div>
+        </div>
+        <div class="fstep" style="border-left-color:var(--purple)">
+          <div class="fn" style="color:var(--purple)">17</div>
+          <div class="fl">Qualified Leads</div>
+          <div class="fp">3.91%</div>
+        </div>
+        <div class="fstep" style="border-left-color:var(--green)">
+          <div class="fn" style="color:var(--green)">2</div>
+          <div class="fl">Bookings Closed</div>
+          <div class="fp">0.46%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">Budget Utilization · Q1 2026</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div>
+        <div class="pb-wrap">
+          <div class="pb-top"><span>Google Ads</span><span class="pb-val">₹2,71,551</span></div>
+          <div class="pb-track"><div class="pb-fill" style="width:38.2%;background:var(--blue)"></div></div>
+        </div>
+        <div class="pb-wrap">
+          <div class="pb-top"><span>Meta Ads</span><span class="pb-val">₹4,39,941</span></div>
+          <div class="pb-track"><div class="pb-fill" style="width:61.8%;background:var(--orange)"></div></div>
+        </div>
+        <div class="pb-wrap">
+          <div class="pb-top"><span>Total Q1 Budget Used</span><span class="pb-val">₹7,11,492 / ₹12,00,000</span></div>
+          <div class="pb-track"><div class="pb-fill" style="width:59.3%;background:var(--gold)"></div></div>
+        </div>
+        <div class="pb-wrap">
+          <div class="pb-top"><span>Current Month Budget</span><span class="pb-val">₹4,00,000</span></div>
+          <div class="pb-track"><div class="pb-fill" style="width:100%;background:var(--green)"></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="card-t" style="margin-bottom:12px;">Key Efficiency Metrics</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);">
+            <span style="font-size:11px;color:var(--cream3);">Mktg Spend as % of Revenue</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:12px;">2.39%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);">
+            <span style="font-size:11px;color:var(--cream3);">SV → Booking Conversion</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:700;font-size:12px;">13.3%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);">
+            <span style="font-size:11px;color:var(--cream3);">Lead → SV Conversion</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:700;font-size:12px;">3.45%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);">
+            <span style="font-size:11px;color:var(--cream3);">Meta vs Google Lead Cost</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--cream);font-weight:700;font-size:12px;">Comparable</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;">
+            <span style="font-size:11px;color:var(--cream3);">Odisha Targeting Efficiency</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:12px;">5/15 SV Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dnote">Source: Expenses, Lead Status, Revenue sheets · Feb 1 – Apr 30, 2026 · All figures in INR</div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║            SITE VISITS                  ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="panel" id="tab-sv">
+  <div class="sec-head">
+    <div class="sec-ttl">
+      <h2>Site Visit Intelligence</h2>
+      <p>SV Done · SV Scheduled · Open Leads with SV Appointments — Feb–Apr 2026</p>
+    </div>
+    <span class="sec-period">15 SV DONE · 1 SCHEDULED</span>
+  </div>
+
+  <div class="kpis" style="grid-template-columns:repeat(auto-fill,minmax(175px,1fr))">
+    <div class="kpi g">
+      <div class="kpi-lbl">Total SV Done</div>
+      <div class="kpi-val">15</div>
+      <div class="kpi-note">Across 3 months · All Qualified</div>
+    </div>
+    <div class="kpi b">
+      <div class="kpi-lbl">SV — February</div>
+      <div class="kpi-val">5</div>
+      <div class="kpi-note">Anand, Niranjan, Najeeba, Umakanta, Abhimanyu</div>
+    </div>
+    <div class="kpi o">
+      <div class="kpi-lbl">SV — March</div>
+      <div class="kpi-val">6</div>
+      <div class="kpi-note">Nirod, A.K, Sunil, Jyotsna, Sarang, Dr Mohapatra</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">SV — April</div>
+      <div class="kpi-val">4</div>
+      <div class="kpi-note">Abhimanyu, Asish, Bharat Jatania, Somil</div>
+    </div>
+    <div class="kpi p">
+      <div class="kpi-lbl">SV Scheduled</div>
+      <div class="kpi-val">1</div>
+      <div class="kpi-note">Dhirendra · May 24, 2026</div>
+    </div>
+    <div class="kpi r">
+      <div class="kpi-lbl">Open w/ SV Appt.</div>
+      <div class="kpi-val">48</div>
+      <div class="kpi-note">Confirmed visit dates in May–Jul</div>
+    </div>
+    <div class="kpi g">
+      <div class="kpi-lbl">SV → Booking Rate</div>
+      <div class="kpi-val">13.3%</div>
+      <div class="kpi-note">2 bookings from 15 SVs</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">Odisha Targeting SVs</div>
+      <div class="kpi-val">5</div>
+      <div class="kpi-note">33% of all SV Done from this campaign</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">SV Done — Monthly Trend</div>
+      <div class="cw"><canvas id="c-sv-trend"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">SV Source Analysis</div>
+      <div class="cw"><canvas id="c-sv-source"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">All 15 SV Done — Visitor Log</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Visitor Name</th>
+              <th>Lead Date</th>
+              <th>SV Date</th>
+              <th>Month</th>
+              <th>Source</th>
+              <th>Campaign</th>
+              <th>Booking</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Anand</td><td>23-Feb</td><td>23-Feb</td><td><span class="badge b-b">February</span></td><td>Digital Media</td><td>—</td><td>—</td></tr>
+            <tr><td>2</td><td>Niranjan</td><td>19-Feb</td><td>17-Apr</td><td><span class="badge b-b">February</span></td><td>Digital Media</td><td>—</td><td>—</td></tr>
+            <tr><td>3</td><td>Najeeba</td><td>18-Feb</td><td>24-Feb</td><td><span class="badge b-b">February</span></td><td>Media Online</td><td>—</td><td>—</td></tr>
+            <tr><td>4</td><td>Umakanta</td><td>15-Feb</td><td>27-Feb</td><td><span class="badge b-b">February</span></td><td>Media Online</td><td>Odisha Targeting</td><td>—</td></tr>
+            <tr><td>5</td><td>Abhimanyu</td><td>07-Feb</td><td>23-Apr</td><td><span class="badge b-b">February</span></td><td>Media Online</td><td>Odisha Targeting</td><td>—</td></tr>
+            <tr><td>6</td><td>Nirod</td><td>29-Mar</td><td>30-Mar</td><td><span class="badge b-o">March</span></td><td>Media Online</td><td>—</td><td>—</td></tr>
+            <tr><td>7</td><td>A.K.</td><td>22-Mar</td><td>23-Mar</td><td><span class="badge b-o">March</span></td><td>Digital Media</td><td>—</td><td>—</td></tr>
+            <tr><td>8</td><td>Sunil</td><td>17-Mar</td><td>21-Mar</td><td><span class="badge b-o">March</span></td><td>Media Online</td><td>Odisha Targeting</td><td>—</td></tr>
+            <tr><td>9</td><td>Jyotsna</td><td>11-Mar</td><td>11-Mar</td><td><span class="badge b-o">March</span></td><td>Media Online</td><td>—</td><td>—</td></tr>
+            <tr><td>10</td><td>Sarang</td><td>10-Mar</td><td>14-Mar</td><td><span class="badge b-o">March</span></td><td>Media Online</td><td>Odisha Targeting</td><td>—</td></tr>
+            <tr><td>11</td><td>Dr M. Mohapatra</td><td>08-Mar</td><td>05-Apr</td><td><span class="badge b-o">March</span></td><td>Media Online</td><td>—</td><td>—</td></tr>
+            <tr><td>12</td><td>Abhimanyu (2)</td><td>22-Apr</td><td>23-Apr</td><td><span class="badge b-gold">April</span></td><td>Media Online</td><td>—</td><td><span class="badge b-g">✓ Booked</span></td></tr>
+            <tr><td>13</td><td>Asish</td><td>22-Apr</td><td>25-Apr</td><td><span class="badge b-gold">April</span></td><td>Digital Media</td><td>—</td><td><span class="badge b-g">✓ Booked</span></td></tr>
+            <tr><td>14</td><td>Bharat Jatania</td><td>17-Apr</td><td>26-Apr</td><td><span class="badge b-gold">April</span></td><td>Media Online</td><td>—</td><td>—</td></tr>
+            <tr><td>15</td><td>Somil</td><td>01-Apr</td><td>02-Apr</td><td><span class="badge b-gold">April</span></td><td>Media Online</td><td>Odisha Targeting</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dnote">SV = Site Visit Done · 2 bookings confirmed post-SV · Odisha Targeting campaign drove 5 of 15 SVs (33.3%)</div>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:18px;">
+        <div class="card-t">Upcoming SV Appointments (Open Leads)</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Lead Date</th><th>SV Appointment</th><th>Month Created</th></tr></thead>
+            <tbody>
+              <tr><td>Dhirendra</td><td>06-Apr</td><td><span style="color:var(--gold)">24-May-2026</span></td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Jashobant</td><td>30-Apr</td><td>22-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Alisa</td><td>30-Apr</td><td>16-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Siba</td><td>28-Apr</td><td>23-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Loknath</td><td>27-Apr</td><td>01-Jul-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Neha</td><td>25-Apr</td><td>25-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Jitendra Kumar</td><td>25-Apr</td><td>17-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Surekha</td><td>24-Apr</td><td>16-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Ravi</td><td>22-Apr</td><td>23-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+              <tr><td>Rohit</td><td>21-Apr</td><td>16-May-2026</td><td><span class="badge b-gold">April</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dnote">48 open leads have confirmed visit dates · Majority scheduled for May 2026 · High conversion opportunity</div>
+      </div>
+
+      <div class="card">
+        <div class="card-t">SV to Booking Funnel</div>
+        <div class="fstep" style="border-left-color:var(--orange);margin-bottom:7px">
+          <div class="fn" style="color:var(--orange)">435</div>
+          <div class="fl">Total Leads</div><div class="fp">100%</div>
+        </div>
+        <div class="fstep" style="border-left-color:var(--purple);margin-bottom:7px">
+          <div class="fn" style="color:var(--purple)">17</div>
+          <div class="fl">Qualified Leads</div><div class="fp">3.9%</div>
+        </div>
+        <div class="fstep" style="border-left-color:var(--gold);margin-bottom:7px">
+          <div class="fn" style="color:var(--gold)">15</div>
+          <div class="fl">SV Done</div><div class="fp">88.2% of Qualified</div>
+        </div>
+        <div class="fstep" style="border-left-color:var(--green)">
+          <div class="fn" style="color:var(--green)">2</div>
+          <div class="fl">Booked</div><div class="fp">13.3% of SV Done</div>
+        </div>
+        <div class="dnote" style="margin-top:14px;">Key insight: 48 leads with upcoming SV appointments represent a <span style="color:var(--gold)">~6 booking potential</span> at current SV→booking rate</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           LEAD ANALYTICS                ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="panel" id="tab-leads">
+  <div class="sec-head">
+    <div class="sec-ttl">
+      <h2>Lead Analytics</h2>
+      <p>435 total leads · Full pipeline breakdown · Feb–Apr 2026</p>
+    </div>
+    <span class="sec-period">ALL SOURCES</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi b"><div class="kpi-lbl">Feb Leads</div><div class="kpi-val">176</div><div class="kpi-note">Peak month · ₹3.14L spent</div></div>
+    <div class="kpi o"><div class="kpi-lbl">Mar Leads</div><div class="kpi-val">112</div><div class="kpi-note"><span class="dn">↓36.4%</span> vs Feb · ₹1.85L spent</div></div>
+    <div class="kpi g"><div class="kpi-lbl">Apr Leads</div><div class="kpi-val">147</div><div class="kpi-note"><span class="up">↑31.3%</span> vs Mar · ₹2.12L spent</div></div>
+    <div class="kpi r"><div class="kpi-lbl">Not Qualified</div><div class="kpi-val">367</div><div class="kpi-note">84.4% disqualification rate</div></div>
+    <div class="kpi"><div class="kpi-lbl">Open / Active</div><div class="kpi-val">51</div><div class="kpi-note">In active follow-up pipeline</div></div>
+    <div class="kpi p"><div class="kpi-lbl">Qualified Total</div><div class="kpi-val">17</div><div class="kpi-note">Feb 6 · Mar 6 · Apr 5</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">Lead Status by Month (Stacked)</div>
+      <div class="cw"><canvas id="c-lead-status"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Disqualification Reasons</div>
+      <div class="cw"><canvas id="c-disqual"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g21">
+    <div class="card">
+      <div class="card-t">Lead Cost Analysis by Month</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th><th>Ad Spend (₹)</th><th>Leads</th><th>Qualified</th>
+              <th>SV Done</th><th>Cost/Lead</th><th>Cost/Qualified</th><th>Cost/SV</th><th>Bookings</th><th>Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>February</td><td>3,13,700</td><td>176</td><td>6</td>
+              <td>5</td><td>₹1,782</td><td>₹52,283</td><td>₹62,740</td><td>0</td><td>—</td>
+            </tr>
+            <tr>
+              <td>March</td><td>1,85,406</td><td>112</td><td>6</td>
+              <td>6</td><td>₹1,655</td><td>₹30,901</td><td>₹30,901</td><td>0</td><td>—</td>
+            </tr>
+            <tr>
+              <td>April</td><td>2,12,386</td><td>147</td><td>5</td>
+              <td>4</td><td>₹1,445</td><td>₹42,477</td><td>₹53,097</td><td>2</td><td>₹2.98 Cr</td>
+            </tr>
+            <tr class="total-row">
+              <td>TOTAL</td><td>7,11,492</td><td>435</td><td>17</td>
+              <td>15</td><td>₹1,635</td><td>₹41,853</td><td>₹47,433</td><td>2</td><td>₹2.98 Cr</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dnote">Cost/SV = Total Spend ÷ SV Done count · Mar had best Cost/SV efficiency · Apr had 2 confirmed bookings post-SV</div>
+    </div>
+    <div class="card">
+      <div class="card-t">Lead Quality Tiers</div>
+      <div class="fstep" style="border-left-color:var(--green);margin-bottom:8px">
+        <div class="fn" style="color:var(--green)">A</div>
+        <div class="fl">SV Done — Visited Site</div>
+        <div class="fp" style="color:var(--green)">15</div>
+      </div>
+      <div class="fstep" style="border-left-color:var(--blue);margin-bottom:8px">
+        <div class="fn" style="color:var(--blue)">B</div>
+        <div class="fl">Qualified — Ready to Visit</div>
+        <div class="fp" style="color:var(--blue)">2</div>
+      </div>
+      <div class="fstep" style="border-left-color:var(--orange);margin-bottom:8px">
+        <div class="fn" style="color:var(--orange)">C</div>
+        <div class="fl">Open — Active Followup</div>
+        <div class="fp" style="color:var(--orange)">51</div>
+      </div>
+      <div class="fstep" style="border-left-color:var(--red)">
+        <div class="fn" style="color:var(--red)">D</div>
+        <div class="fl">Not Qualified / Junk</div>
+        <div class="fp" style="color:var(--red)">367</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">Source Channel — Lead Volume &amp; Cost Efficiency</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Primary Source</th><th>Sub Source</th><th>Lead Count</th><th>Share %</th><th>SV Done</th><th>SV Rate</th><th>Efficiency</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Media Online</td><td>Website / Microsite</td><td>280</td><td>64.4%</td><td>9</td><td>3.2%</td><td><span class="badge b-g">Highest Volume</span></td></tr>
+          <tr><td>Digital Media</td><td>Social — Facebook</td><td>100</td><td>23.0%</td><td>4</td><td>4.0%</td><td><span class="badge b-gold">Best SV Rate</span></td></tr>
+          <tr><td>Media Online</td><td>Social — Facebook</td><td>55</td><td>12.6%</td><td>2</td><td>3.6%</td><td><span class="badge b-b">Mixed</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           CAMPAIGNS                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="panel" id="tab-campaigns">
+  <div class="sec-head">
+    <div class="sec-ttl">
+      <h2>Campaign Analytics</h2>
+      <p>Google Ads &amp; Meta Ads — Assotech World Avenue 07</p>
+    </div>
+    <span class="sec-period">FEB–APR 2026 · COMBINED</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi b"><div class="kpi-lbl">Google Total Spend</div><div class="kpi-val">₹2.72L</div><div class="kpi-note">4 active · 13 paused campaigns</div></div>
+    <div class="kpi o"><div class="kpi-lbl">Meta Total Spend</div><div class="kpi-val">₹4.40L</div><div class="kpi-note">16 campaigns tracked</div></div>
+    <div class="kpi g"><div class="kpi-lbl">Total Impressions (Meta)</div><div class="kpi-val">3.11M</div><div class="kpi-note">Across all Meta campaigns</div></div>
+    <div class="kpi"><div class="kpi-lbl">Google Clicks</div><div class="kpi-val">3,714</div><div class="kpi-note">Avg CPC: <span class="nt">₹63.92</span></div></div>
+    <div class="kpi p"><div class="kpi-lbl">Meta Link Clicks</div><div class="kpi-val">16,534</div><div class="kpi-note">Total across all Meta campaigns</div></div>
+    <div class="kpi r"><div class="kpi-lbl">Google Conversions</div><div class="kpi-val">40</div><div class="kpi-note">Best: Competitor <span class="up">2.89%</span> conv rate</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">Google Ads — Spend vs Conversions</div>
+      <div class="cw"><canvas id="c-goog-camp"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Meta Ads — Spend by Campaign (Top 8)</div>
+      <div class="cw"><canvas id="c-meta-spend"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px;">
+    <div class="card-t">Google Ads — Active Campaigns Detail</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Campaign</th><th>Type</th><th>Status</th><th>Spend (₹)</th><th>Clicks</th><th>Avg CPC</th><th>Conversions</th><th>Cost/Conv</th><th>Conv Rate</th><th>Assessment</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Competitor</td><td>Search</td><td><span class="badge b-g">Active</span></td><td>52,895</td><td>658</td><td>₹80.39</td><td>19</td><td>₹2,784</td><td>2.89%</td><td><span class="badge b-g">Best Performer</span></td></tr>
+          <tr><td>Bbsr Generic</td><td>Search</td><td><span class="badge b-g">Active</span></td><td>74,593</td><td>1,046</td><td>₹71.31</td><td>2</td><td>₹37,297</td><td>0.19%</td><td><span class="badge b-r">Poor Conv</span></td></tr>
+          <tr><td>Brand Campaign</td><td>Search</td><td><span class="badge b-g">Active</span></td><td>53,404</td><td>1,048</td><td>₹50.96</td><td>3</td><td>₹17,801</td><td>0.29%</td><td><span class="badge b-o">Moderate</span></td></tr>
+          <tr><td>Luxury Search Ads</td><td>Search</td><td><span class="badge b-g">Active</span></td><td>55,982</td><td>962</td><td>₹58.19</td><td>0</td><td>—</td><td>0%</td><td><span class="badge b-r">0 Conversions</span></td></tr>
+          <tr><td>BBSR Keywords (P)</td><td>Search</td><td><span class="badge b-o">Paused</span></td><td>32,808</td><td>514</td><td>₹63.83</td><td>16</td><td>₹2,050</td><td>3.11%</td><td><span class="badge b-gold">Consider Resume</span></td></tr>
+          <tr><td>Display – Avenue 7</td><td>Display</td><td><span class="badge b-o">Paused</span></td><td>4,140</td><td>1,491</td><td>₹2.78</td><td>0</td><td>—</td><td>0%</td><td><span class="badge b-b">Awareness Only</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">Meta Ads — Lead Generation Campaigns (Sorted by CPR)</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Campaign</th><th>Leads</th><th>Cost/Lead (₹)</th><th>Spend (₹)</th><th>Impressions</th><th>Link Clicks</th><th>CPC (₹)</th><th>CTR</th><th>Verdict</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mrinmay Audience</td><td>49</td><td style="color:var(--green);font-weight:700">594</td><td>29,099</td><td>51,584</td><td>252</td><td>115.47</td><td>0.49%</td><td><span class="badge b-g">⭐ Best CPL</span></td></tr>
+          <tr><td>Carousel</td><td>10</td><td style="color:var(--green);font-weight:700">956</td><td>9,561</td><td>20,113</td><td>207</td><td>46.19</td><td>1.03%</td><td><span class="badge b-g">Good CPL</span></td></tr>
+          <tr><td>Form Lead — Avenue 7</td><td>58</td><td style="color:var(--gold);font-weight:700">1,159</td><td>67,249</td><td>297,432</td><td>1,938</td><td>34.70</td><td>0.65%</td><td><span class="badge b-gold">High Volume</span></td></tr>
+          <tr><td>Income × Interest</td><td>27</td><td>1,309</td><td>35,333</td><td>165,758</td><td>706</td><td>50.05</td><td>0.43%</td><td><span class="badge b-b">Average</span></td></tr>
+          <tr><td>Totality 1% Lookalike</td><td>26</td><td>1,318</td><td>34,256</td><td>119,279</td><td>1,076</td><td>31.84</td><td>0.90%</td><td><span class="badge b-b">Average</span></td></tr>
+          <tr><td>Price Hike</td><td>14</td><td>1,347</td><td>18,864</td><td>85,325</td><td>435</td><td>43.37</td><td>0.51%</td><td><span class="badge b-b">Average</span></td></tr>
+          <tr><td>Income × Real Estate</td><td>32</td><td style="color:var(--orange)">2,324</td><td>74,353</td><td>251,152</td><td>1,276</td><td>58.27</td><td>0.51%</td><td><span class="badge b-o">High Cost</span></td></tr>
+          <tr><td>Interest + Behaviour</td><td>5</td><td style="color:var(--red)">2,596</td><td>12,982</td><td>40,056</td><td>311</td><td>41.74</td><td>0.78%</td><td><span class="badge b-r">Pause It</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="dnote">Sorted by Cost per Lead (ascending) · Mrinmay Audience at ₹594 CPL is 2x more efficient than average · Interest+Behaviour at ₹2,596 should be paused</div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║         FINANCIAL MODEL                 ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="panel" id="tab-financial">
+  <div class="sec-head">
+    <div class="sec-ttl">
+      <h2>Financial Model</h2>
+      <p>Marketing P&amp;L · ROAS · Budget Tracking · Daily Spend Analysis</p>
+    </div>
+    <span class="sec-period">FEB–APR 2026 ACTUALS</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi g"><div class="kpi-lbl">Q1 Revenue</div><div class="kpi-val">₹2.98 Cr</div><div class="kpi-note">2 units booked @ avg ₹1.49 Cr</div></div>
+    <div class="kpi"><div class="kpi-lbl">Q1 Total Spend</div><div class="kpi-val">₹7.11L</div><div class="kpi-note">Meta ₹4.40L · Google ₹2.72L</div></div>
+    <div class="kpi b"><div class="kpi-lbl">Best Month ROAS</div><div class="kpi-val">140.3x</div><div class="kpi-note">April 2026 · 2 bookings</div></div>
+    <div class="kpi o"><div class="kpi-lbl">Q1 ROAS</div><div class="kpi-val">41.88x</div><div class="kpi-note">Revenue ÷ Total ad spend</div></div>
+    <div class="kpi g"><div class="kpi-lbl">Mktg as % Revenue</div><div class="kpi-val">2.39%</div><div class="kpi-note">Extremely efficient marketing spend</div></div>
+    <div class="kpi r"><div class="kpi-lbl">Cost Per Booking</div><div class="kpi-val">₹3.56L</div><div class="kpi-note">2 bookings · ₹7.11L total spend</div></div>
+  </div>
+
+  <div class="g12">
+    <div class="card">
+      <div class="card-t">Monthly P&amp;L</div>
+      <table>
+        <thead>
+          <tr><th>Month</th><th>Google Spend</th><th>Meta Spend</th><th>Total Spend</th><th>Revenue</th><th>ROAS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>February</td><td>₹1,29,935</td><td>₹1,83,765</td><td>₹3,13,700</td><td>—</td><td style="color:var(--red)">0x</td></tr>
+          <tr><td>March</td><td>₹70,637</td><td>₹1,14,769</td><td>₹1,85,406</td><td>—</td><td style="color:var(--red)">0x</td></tr>
+          <tr><td>April</td><td>₹70,979</td><td>₹1,41,407</td><td>₹2,12,386</td><td>₹2,98,00,000</td><td style="color:var(--green);font-weight:700">140.3x</td></tr>
+          <tr class="total-row"><td>Q1 Total</td><td>₹2,71,551</td><td>₹4,39,941</td><td>₹7,11,492</td><td>₹2,98,00,000</td><td style="color:var(--gold)">41.88x</td></tr>
+        </tbody>
+      </table>
+      <div class="dnote">Revenue recognized at booking date · Bookings closed in April for 2 units at avg ₹1.49 Cr</div>
+    </div>
+    <div class="card">
+      <div class="card-t">ROAS Trend &amp; Monthly Spend Comparison</div>
+      <div class="cw"><canvas id="c-roas-trend"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">Daily Spend Pattern — All 3 Months Combined</div>
+      <div class="cw-lg"><canvas id="c-daily-feb"></canvas></div>
+      <div class="dnote">February showed highest daily peaks (₹21K+) · March stabilized · April mid-month dip followed by recovery</div>
+    </div>
+    <div class="card">
+      <div class="card-t">Platform Efficiency Radar</div>
+      <div class="cw-lg"><canvas id="c-radar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card">
+      <div class="card-t">Google Spend — Monthly</div>
+      <div class="cw-sm"><canvas id="c-goog-monthly"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Meta Spend — Monthly</div>
+      <div class="cw-sm"><canvas id="c-meta-monthly"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Platform Cost % Split</div>
+      <div class="cw-sm"><canvas id="c-plat-split"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║            FORECAST                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="panel" id="tab-forecast">
+  <div class="sec-head">
+    <div class="sec-ttl">
+      <h2>Forecast &amp; Planning Model</h2>
+      <p>Q2 2026 · May–Jul · ₹12L Planned Budget · Data-driven projection</p>
+    </div>
+    <span class="sec-period">NEXT QUARTER · Q2 2026</span>
+  </div>
+
+  <div class="fhero">
+    <div>
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Q2 2026 Projected Revenue (Base Case)</div>
+      <div class="fhero-big">₹5.03 Cr</div>
+      <div class="fhero-lbl">Based on ₹12L planned budget · 41.88x historical ROAS · 61.14 leads/₹1L</div>
+      <div class="fhero-sub">
+        <div class="fhero-metric"><div class="ml">Projected Leads</div><div class="mv">734</div></div>
+        <div class="fhero-metric"><div class="ml">Expected SV Done</div><div class="mv">~25</div></div>
+        <div class="fhero-metric"><div class="ml">Expected Qualified</div><div class="mv">29</div></div>
+        <div class="fhero-metric"><div class="ml">Expected Bookings</div><div class="mv" style="color:var(--gold)">3–4</div></div>
+      </div>
+    </div>
+    <div class="fparams">
+      <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream4);margin-bottom:4px;">Model Parameters (Actuals)</div>
+      <div class="fparam"><span class="fparam-l">Planned Q2 Budget</span><span class="fparam-v">₹12,00,000</span></div>
+      <div class="fparam"><span class="fparam-l">Historical ROAS (Q1)</span><span class="fparam-v">41.88x</span></div>
+      <div class="fparam"><span class="fparam-l">Leads per ₹1L Spend</span><span class="fparam-v">61.14</span></div>
+      <div class="fparam"><span class="fparam-l">Lead → SV Rate</span><span class="fparam-v">3.45%</span></div>
+      <div class="fparam"><span class="fparam-l">SV → Booking Rate</span><span class="fparam-v">13.3%</span></div>
+      <div class="fparam"><span class="fparam-l">Avg Revenue/Booking</span><span class="fparam-v">₹1.49 Cr</span></div>
+    </div>
+  </div>
+
+  <!-- Interactive Calculator -->
+  <div class="g2" style="margin-bottom:18px;">
+    <div class="card">
+      <div class="card-t">Interactive Forecast Calculator</div>
+      <div class="calc-row"><label>Ad Budget (₹)</label><input type="number" id="ci-budget" value="1200000"></div>
+      <div class="calc-row"><label>Expected ROAS (x)</label><input type="number" id="ci-roas" value="41.88" step="0.1"></div>
+      <div class="calc-row"><label>Leads per ₹1L</label><input type="number" id="ci-lpl" value="61.14" step="0.1"></div>
+      <div class="calc-row"><label>Lead→SV Rate (%)</label><input type="number" id="ci-svr" value="3.45" step="0.01"></div>
+      <div class="calc-row"><label>SV→Booking Rate (%)</label><input type="number" id="ci-br" value="13.3" step="0.1"></div>
+      <div class="calc-row"><label>Avg Revenue/Booking (₹)</label><input type="number" id="ci-arb" value="14900000"></div>
+      <button class="calc-btn" onclick="runCalc()">▶ Calculate Forecast</button>
+    </div>
+    <div class="card">
+      <div class="card-t">Forecast Output</div>
+      <div class="calc-output">
+        <div class="co-row"><span class="co-lbl">Projected Revenue</span><span class="co-val" id="co-rev" style="color:var(--gold)">₹5,02,56,000</span></div>
+        <div class="co-row"><span class="co-lbl">Projected Leads</span><span class="co-val" id="co-leads">734</span></div>
+        <div class="co-row"><span class="co-lbl">Expected SV Done</span><span class="co-val" id="co-sv" style="color:var(--gold)">25</span></div>
+        <div class="co-row"><span class="co-lbl">Expected Bookings</span><span class="co-val" id="co-book" style="color:var(--green)">3.37</span></div>
+        <div class="co-row"><span class="co-lbl">Cost Per Lead (₹)</span><span class="co-val" id="co-cpl">₹1,634</span></div>
+        <div class="co-row"><span class="co-lbl">Cost Per SV (₹)</span><span class="co-val" id="co-cpsv">₹47,346</span></div>
+        <div class="co-row"><span class="co-lbl">Cost Per Booking (₹)</span><span class="co-val" id="co-cpb">₹3,56,000</span></div>
+        <div class="co-row"><span class="co-lbl">Mktg as % of Revenue</span><span class="co-val" id="co-pct">2.39%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">Q1 Actuals vs Q2 Projection</div>
+      <div class="cw"><canvas id="c-forecast-comp"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">3-Scenario Revenue Projection</div>
+      <div class="cw"><canvas id="c-scenarios"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">Sensitivity Analysis — Revenue by Budget × ROAS</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Budget (₹)</th><th>ROAS 20x</th><th>ROAS 30x</th><th>ROAS 41.88x ★</th><th>ROAS 60x</th><th>ROAS 100x</th><th>Est. Leads</th><th>Est. SVs</th><th>Est. Bookings</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>₹6,00,000</td><td>₹1.20 Cr</td><td>₹1.80 Cr</td><td class="sens-base">₹2.51 Cr</td><td>₹3.60 Cr</td><td class="sens-hi">₹6.00 Cr</td><td>367</td><td>13</td><td>1.69</td></tr>
+          <tr><td>₹8,00,000</td><td>₹1.60 Cr</td><td>₹2.40 Cr</td><td class="sens-base">₹3.35 Cr</td><td>₹4.80 Cr</td><td class="sens-hi">₹8.00 Cr</td><td>489</td><td>17</td><td>2.25</td></tr>
+          <tr><td>₹10,00,000</td><td>₹2.00 Cr</td><td>₹3.00 Cr</td><td class="sens-base">₹4.19 Cr</td><td>₹6.00 Cr</td><td class="sens-hi">₹10.00 Cr</td><td>611</td><td>21</td><td>2.81</td></tr>
+          <tr class="sens-row-highlight"><td><strong style="color:var(--gold)">₹12,00,000 ★</strong></td><td>₹2.40 Cr</td><td>₹3.60 Cr</td><td class="sens-base">₹5.03 Cr</td><td>₹7.20 Cr</td><td class="sens-hi">₹12.00 Cr</td><td>734</td><td>25</td><td>3.37</td></tr>
+          <tr><td>₹15,00,000</td><td>₹3.00 Cr</td><td>₹4.50 Cr</td><td class="sens-base">₹6.28 Cr</td><td>₹9.00 Cr</td><td class="sens-hi">₹15.00 Cr</td><td>917</td><td>32</td><td>4.22</td></tr>
+          <tr><td>₹20,00,000</td><td>₹4.00 Cr</td><td>₹6.00 Cr</td><td class="sens-base">₹8.38 Cr</td><td>₹12.00 Cr</td><td class="sens-hi">₹20.00 Cr</td><td>1,223</td><td>42</td><td>5.63</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="dnote">★ Planned Q2 Budget · SV estimate = Leads × 3.45% SV rate · Bookings = SVs × 13.3% booking rate · Avg unit value ₹1.49 Cr</div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║        UPCOMING CAMPAIGNS               ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="panel" id="tab-events">
+  <div class="sec-head">
+    <div class="sec-ttl">
+      <h2>Upcoming Campaigns</h2>
+      <p>Q2 2026 Calendar · Raja Festival · Independence Day · Budget Planning</p>
+    </div>
+    <span class="sec-period">MAY–AUG 2026</span>
+  </div>
+
+  <div class="kpis" style="grid-template-columns:repeat(auto-fill,minmax(175px,1fr))">
+    <div class="kpi o"><div class="kpi-lbl">Q2 Planned Budget</div><div class="kpi-val">₹12L</div><div class="kpi-note">May ₹3.5L · Jun ₹4.5L · Jul ₹4L</div></div>
+    <div class="kpi"><div class="kpi-lbl">Campaigns Planned</div><div class="kpi-val">2</div><div class="kpi-note">Raja Campaign + Independence Day</div></div>
+    <div class="kpi g"><div class="kpi-lbl">Days to Raja</div><div class="kpi-val" id="days-raja">—</div><div class="kpi-note">Odisha's biggest festival · Jun 14</div></div>
+    <div class="kpi b"><div class="kpi-lbl">Days to I-Day</div><div class="kpi-val" id="days-iday">—</div><div class="kpi-note">Independence Day · Aug 15</div></div>
+    <div class="kpi p"><div class="kpi-lbl">Open SVs Pipeline</div><div class="kpi-val">48</div><div class="kpi-note">May–Jul appointments confirmed</div></div>
+    <div class="kpi g"><div class="kpi-lbl">Pipeline Revenue Potential</div><div class="kpi-val">~₹9Cr</div><div class="kpi-note">48 SVs × 13.3% booking × ₹1.49Cr</div></div>
+  </div>
+
+  <!-- Raja Campaign -->
+  <div class="ev-card">
+    <div class="ev-bar"></div>
+    <div class="ev-date"><div class="ev-mo">JUN</div><div class="ev-day">14</div></div>
+    <div class="ev-body">
+      <h3>🎊 Raja Parba Campaign — Odisha's Premier Festival</h3>
+      <p>Raja Parba (Mithuna Sankranti) is Odisha's biggest festival celebrating womanhood and the onset of monsoon. This 3-day festival creates extreme emotional resonance with the Bhubaneswar real estate demographic — family gatherings, gifting mentality, and property aspirations peak during this window. "Odisha Targeting" campaign has already proven strong — 5 of 15 SVs came from it. This campaign should be doubled down with Odia-language creatives, property showcase videos, and festival offers.</p>
+      <div class="ev-tags">
+        <span class="badge b-gold">Highest Priority</span>
+        <span class="badge b-o">Meta Ads — Video</span>
+        <span class="badge b-b">Google Search</span>
+        <span class="badge b-g">Odia Language</span>
+        <span class="badge b-p">Lookalike Audience</span>
+        <span class="badge b-gold">Festival Offer</span>
+      </div>
+      <div class="ev-metrics">
+        <div class="ev-metric"><div class="ev-ml">Suggested Budget</div><div class="ev-mv">₹3.5L</div></div>
+        <div class="ev-metric"><div class="ev-ml">Expected Leads</div><div class="ev-mv">200+</div></div>
+        <div class="ev-metric"><div class="ev-ml">Content Language</div><div class="ev-mv">Odia</div></div>
+        <div class="ev-metric"><div class="ev-ml">Duration</div><div class="ev-mv">Jun 10–18</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Independence Day Campaign -->
+  <div class="ev-card">
+    <div class="ev-bar blue-bar"></div>
+    <div class="ev-date" style="background:var(--ink5)"><div class="ev-mo">AUG</div><div class="ev-day" style="color:var(--blue)">15</div></div>
+    <div class="ev-body">
+      <h3>🇮🇳 Independence Day Campaign — August 15, 2026</h3>
+      <p>Independence Day creates strong patriotic-aspirational alignment with the "own your home in free India" narrative. This is a powerful window for luxury real estate with NRI and HNI audiences. The Tier 1 City Awareness campaign (720K impressions for ₹10K) can be scaled for this — targeting Bangalore, Hyderabad, Mumbai-based Odia NRI buyers. Non-skippable YouTube ads with emotional property reveal creative would work strongly.</p>
+      <div class="ev-tags">
+        <span class="badge b-b">National Campaign</span>
+        <span class="badge b-o">YouTube Non-Skip</span>
+        <span class="badge b-gold">NRI Targeting</span>
+        <span class="badge b-g">HNI Audience</span>
+        <span class="badge b-p">Retargeting</span>
+        <span class="badge b-r">Offer-Deadline Driven</span>
+      </div>
+      <div class="ev-metrics">
+        <div class="ev-metric"><div class="ev-ml">Suggested Budget</div><div class="ev-mv">₹4L</div></div>
+        <div class="ev-metric"><div class="ev-ml">Expected Leads</div><div class="ev-mv">250+</div></div>
+        <div class="ev-metric"><div class="ev-ml">Audience</div><div class="ev-mv">Pan-India</div></div>
+        <div class="ev-metric"><div class="ev-ml">Duration</div><div class="ev-mv">Aug 10–16</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-t">Q2 Budget Allocation — Monthly Split</div>
+      <div class="cw"><canvas id="c-q2-budget"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Monthly Budget Plan — Q2 2026</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Month</th><th>Budget</th><th>Meta Split</th><th>Google Split</th><th>Campaign Focus</th></tr></thead>
+          <tbody>
+            <tr><td>May 2026</td><td style="color:var(--cream);font-weight:700">₹3,50,000</td><td>₹1,75,000</td><td>₹1,75,000</td><td><span class="badge b-b">General + SV Retarget</span></td></tr>
+            <tr><td>June 2026</td><td style="color:var(--gold);font-weight:700">₹4,50,000 ★</td><td>₹2,92,500</td><td>₹1,57,500</td><td><span class="badge b-gold">Raja Festival Campaign</span></td></tr>
+            <tr><td>July 2026</td><td style="color:var(--cream);font-weight:700">₹4,00,000</td><td>₹2,20,000</td><td>₹1,80,000</td><td><span class="badge b-g">Follow-up + Brand</span></td></tr>
+            <tr class="total-row"><td>Q2 Total</td><td>₹12,00,000</td><td>₹6,87,500</td><td>₹5,12,500</td><td><span class="badge b-gold">57% Meta / 43% Google</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:16px;padding:14px;background:rgba(78,159,216,0.06);border:1px solid var(--blue2);border-radius:var(--r);">
+        <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">Independence Day — Aug Budget (Q3 Pre-plan)</div>
+        <div style="font-size:11px;color:var(--cream3);line-height:1.7">Aug 15 campaign falls in Q3. Recommend allocating ₹4L separately. Begin NRI creative production in July. Target Odia diaspora in Bangalore, Hyderabad, Mumbai for second-home + investment buyers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="card">
+    <div class="card-t">Strategic Recommendations — Q2 2026</div>
+    <div class="g2" style="margin-bottom:0;">
+      <div>
+        <div class="rec-card" style="border-left-color:var(--green)">
+          <h4 style="color:var(--green)">01 · Scale Mrinmay Audience Campaign 3x</h4>
+          <p>At ₹594 CPL, this is the most efficient Meta campaign — 2.4x better than average. Scale from current ₹29K to ₹90K budget for Q2. Highest ROI lead generation action.</p>
+        </div>
+        <div class="rec-card" style="border-left-color:var(--gold)">
+          <h4 style="color:var(--gold)">02 · Activate Odia Language Creatives for Raja</h4>
+          <p>"Odia Bhari Badhia" Instagram post drove 204 link clicks at ₹3.60 CPL. This proves Odia language content massively outperforms English for this audience. Build all Raja campaign creative in Odia.</p>
+        </div>
+        <div class="rec-card" style="border-left-color:var(--blue)">
+          <h4 style="color:var(--blue)">03 · Reactivate Paused BBSR Keywords Campaign</h4>
+          <p>BBSR Keywords (paused) had 3.11% conversion rate — HIGHEST of all Google campaigns, even beating Competitor (2.89%). Resume with ₹50K budget for Q2 immediately.</p>
+        </div>
+      </div>
+      <div>
+        <div class="rec-card" style="border-left-color:var(--red)">
+          <h4 style="color:var(--red)">04 · Pause Luxury Search Ads + Interest+Behaviour</h4>
+          <p>Luxury Search Ads: ₹55,982 spent, 0 conversions. Interest+Behaviour: ₹2,596 CPL vs ₹594 best. Reallocate these budgets (₹70K+) to Competitor and Mrinmay campaigns.</p>
+        </div>
+        <div class="rec-card" style="border-left-color:var(--purple)">
+          <h4 style="color:var(--purple)">05 · SV Appointment Urgency — 48 Leads Pipeline</h4>
+          <p>48 open leads already have SV dates confirmed for May–July. At 13.3% SV→booking rate, this pipeline alone could yield 6+ bookings (₹8.9 Cr revenue) without any new ad spend.</p>
+        </div>
+        <div class="rec-card" style="border-left-color:var(--orange)">
+          <h4 style="color:var(--orange)">06 · Launch YouTube Non-Skip for Independence Day</h4>
+          <p>Tier 1 City Awareness delivered 720K impressions at ₹0.19 CPV — extremely cost-effective reach. Activate 15-second non-skip YouTube ads for I-Day targeting NRI Odia audience in Bangalore + Hyderabad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="wm">ASSOTECH WORLD · AVENUE 07 · CONFIDENTIAL · 2026</div>
+
+<script>
+// ─── GLOBALS ─────────────────────────────────────
+const G = '#D4A843', GL = '#F0C96A', B = '#4E9FD8', GR = '#3EBF82', R = '#E8534A',
+      O = '#E8943A', P = '#9B6DD8', DIM = 'rgba(237,232,223,0.08)';
+Chart.defaults.color = 'rgba(237,232,223,0.5)';
+Chart.defaults.font.family = "'JetBrains Mono', monospace";
+Chart.defaults.font.size = 10;
+
+// ─── DATE HEADER ─────────────────────────────────
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+
+// ─── COUNTDOWNS ──────────────────────────────────
+function setCountdowns() {
+  const now = new Date();
+  const raja = new Date('2026-06-14');
+  const iday = new Date('2026-08-15');
+  const dr = Math.ceil((raja-now)/86400000);
+  const di = Math.ceil((iday-now)/86400000);
+  document.getElementById('days-raja').textContent = dr > 0 ? dr+'d' : '🎊';
+  document.getElementById('days-iday').textContent = di > 0 ? di+'d' : '🇮🇳';
+}
+setCountdowns();
+
+// ─── TAB SWITCH ──────────────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── FORECAST CALCULATOR ─────────────────────────
+function runCalc() {
+  const budget = +document.getElementById('ci-budget').value||1200000;
+  const roas = +document.getElementById('ci-roas').value||41.88;
+  const lpl = +document.getElementById('ci-lpl').value||61.14;
+  const svr = (+document.getElementById('ci-svr').value||3.45)/100;
+  const br = (+document.getElementById('ci-br').value||13.3)/100;
+  const arb = +document.getElementById('ci-arb').value||14900000;
+
+  const rev = budget * roas;
+  const leads = (budget/100000)*lpl;
+  const svs = leads*svr;
+  const books = svs*br;
+  const cpl = budget/leads;
+  const cpsv = budget/svs;
+  const cpb = budget/books;
+  const pct = (budget/rev)*100;
+
+  const fmt = n => {
+    if(n>=10000000) return '₹'+(n/10000000).toFixed(2)+'Cr';
+    if(n>=100000) return '₹'+(n/100000).toFixed(2)+'L';
+    return '₹'+Math.round(n).toLocaleString('en-IN');
+  };
+
+  document.getElementById('co-rev').textContent = fmt(rev);
+  document.getElementById('co-leads').textContent = Math.round(leads).toLocaleString('en-IN');
+  document.getElementById('co-sv').textContent = Math.round(svs);
+  document.getElementById('co-book').textContent = books.toFixed(2);
+  document.getElementById('co-cpl').textContent = fmt(cpl);
+  document.getElementById('co-cpsv').textContent = fmt(cpsv);
+  document.getElementById('co-cpb').textContent = fmt(cpb);
+  document.getElementById('co-pct').textContent = pct.toFixed(2)+'%';
+}
+
+// ─── CHARTS ──────────────────────────────────────
+const scaleOpts = { grid:{color:DIM} };
+
+// 1. OVERVIEW — Spend vs Revenue
+new Chart('c-spend-rev', { type:'bar',
+  data:{
+    labels:['February','March','April'],
+    datasets:[
+      {label:'Ad Spend (₹)',data:[313700,185406,212386],backgroundColor:'rgba(78,159,216,0.7)',borderRadius:3,yAxisID:'y'},
+      {label:'Revenue (₹)',data:[0,0,29800000],backgroundColor:'rgba(62,191,130,0.7)',borderRadius:3,yAxisID:'y2'}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},
+    scales:{y:{...scaleOpts,title:{display:true,text:'Ad Spend (₹)'}},y2:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Revenue (₹)'}}}}
+});
+
+// 2. OVERVIEW — Leads Pipeline
+new Chart('c-leads-pipe', { type:'bar',
+  data:{
+    labels:['Feb','Mar','Apr'],
+    datasets:[
+      {label:'Not Qualified',data:[164,99,104],backgroundColor:'rgba(232,83,74,0.75)',borderRadius:3},
+      {label:'Open',data:[6,7,38],backgroundColor:'rgba(78,159,216,0.75)',borderRadius:3},
+      {label:'Qualified',data:[6,6,5],backgroundColor:'rgba(62,191,130,0.75)',borderRadius:3}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},
+    scales:{x:{stacked:true,...scaleOpts},y:{stacked:true,...scaleOpts}}}
+});
+
+// 3. Platform Pie
+new Chart('c-platform-pie', { type:'doughnut',
+  data:{
+    labels:['Meta Ads','Google Ads'],
+    datasets:[{data:[439941,271551],backgroundColor:[O,B],borderColor:'#1A1F28',borderWidth:3}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom'}}}
+});
+
+// 4. Source Donut
+new Chart('c-source-donut', { type:'doughnut',
+  data:{
+    labels:['Website/Microsite','Social-FB (Digital)','Social-FB (Media)'],
+    datasets:[{data:[280,100,55],backgroundColor:[G,O,P],borderColor:'#1A1F28',borderWidth:3}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom'}}}
+});
+
+// 5. SV Trend
+new Chart('c-sv-trend', { type:'bar',
+  data:{
+    labels:['February','March','April'],
+    datasets:[
+      {label:'SV Done',data:[5,6,4],backgroundColor:G,borderRadius:4},
+      {label:'Qualified (non-SV)',data:[1,0,1],backgroundColor:P,borderRadius:4}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},
+    scales:{x:{...scaleOpts},y:{...scaleOpts,title:{display:true,text:'Count'},ticks:{stepSize:1}}}}
+});
+
+// 6. SV Source
+new Chart('c-sv-source', { type:'doughnut',
+  data:{
+    labels:['Media Online (Website)','Digital Media (Social)'],
+    datasets:[{data:[11,4],backgroundColor:[G,B],borderColor:'#1A1F28',borderWidth:3}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
+    plugins:{legend:{position:'bottom'},
+      tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw} SVs (${((c.raw/15)*100).toFixed(1)}%)`}}}}
+});
+
+// 7. Lead Status
+new Chart('c-lead-status', { type:'bar',
+  data:{
+    labels:['Feb','Mar','Apr'],
+    datasets:[
+      {label:'Not Qualified',data:[164,99,104],backgroundColor:'rgba(232,83,74,0.75)',borderRadius:3},
+      {label:'Open',data:[6,7,38],backgroundColor:'rgba(78,159,216,0.75)',borderRadius:3},
+      {label:'Qualified',data:[6,6,5],backgroundColor:'rgba(62,191,130,0.75)',borderRadius:3}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},
+    scales:{x:{stacked:true,...scaleOpts},y:{stacked:true,...scaleOpts}}}
+});
+
+// 8. Disqualification
+new Chart('c-disqual', { type:'bar',
+  data:{
+    labels:['Not Interested','Call Unanswered','Not Looking For Property','Misclick','Not Contactable','Budget Issue','Location Issue','Other'],
+    datasets:[{label:'Count',data:[27,100,98,30,19,17,14,62],backgroundColor:'rgba(232,83,74,0.65)',borderRadius:3}]
+  },
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},scales:{x:scaleOpts,y:scaleOpts}}
+});
+
+// 9. Google Campaigns
+new Chart('c-goog-camp', { type:'bar',
+  data:{
+    labels:['Bbsr Generic','Luxury Search','Brand','Competitor','BBSR Keywords(P)','Display'],
+    datasets:[
+      {label:'Spend (₹)',data:[74593,55982,53404,52895,32808,4140],backgroundColor:'rgba(78,159,216,0.7)',borderRadius:3,yAxisID:'y'},
+      {label:'Conversions',data:[2,0,3,19,16,0],backgroundColor:'rgba(62,191,130,0.7)',borderRadius:3,yAxisID:'y2'}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},
+    scales:{y:scaleOpts,y2:{position:'right',grid:{drawOnChartArea:false}}}}
+});
+
+// 10. Meta Spend
+new Chart('c-meta-spend', { type:'bar',
+  data:{
+    labels:['Income×RE','Form Lead','Luxury Web','Totality 1%','Mrinmay','Price Hike','Interest+Behav','SV Lookalike'],
+    datasets:[{label:'Spend (₹)',data:[74353,67249,39071,34256,29099,18864,12982,24009],backgroundColor:'rgba(232,148,58,0.7)',borderRadius:3}]
+  },
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:scaleOpts,y:scaleOpts}}
+});
+
+// 11. ROAS Trend
+new Chart('c-roas-trend', { type:'line',
+  data:{
+    labels:['February','March','April'],
+    datasets:[
+      {label:'ROAS (x)',data:[0,0,140.31],borderColor:G,backgroundColor:'rgba(212,168,67,0.08)',tension:0.4,pointRadius:6,pointBackgroundColor:G,fill:true,yAxisID:'y2'},
+      {label:'Ad Spend (₹K)',data:[313.7,185.4,212.4],borderColor:B,borderDash:[5,4],backgroundColor:'transparent',tension:0.4,pointRadius:4,pointBackgroundColor:B}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},
+    scales:{y:{...scaleOpts,title:{display:true,text:'Spend (₹K)'}},y2:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'ROAS'}}}}
+});
+
+// 12. Daily spend — all months
+const febDates = ['Feb01','Feb02','Feb03','Feb04','Feb05','Feb06','Feb07','Feb08','Feb09','Feb10','Feb11','Feb12','Feb14','Feb15','Feb16','Feb17','Feb18','Feb19','Feb20','Feb21','Feb22','Feb23','Feb24','Feb25','Feb26','Feb27','Feb28'];
+const febVals = [18369,16450,19942,15429,3788,5686,21659,21921,17557,15900,8430,2733,8592,10972,10200,10332,9873,7594,11643,8238,5273,6805,9280,9376,12233,12143,13283];
+const marDates = ['Mar01','Mar02','Mar03','Mar04','Mar05','Mar06','Mar07','Mar09','Mar10','Mar11','Mar12','Mar13','Mar14','Mar15','Mar16','Mar17','Mar18','Mar19','Mar20','Mar21','Mar24','Mar27','Mar28','Mar29','Mar30','Mar31'];
+const marVals = [5954,6057,5964,6917,6272,5940,4966,2516,6751,15252,10628,6185,7673,6707,10704,9609,7326,3318,6095,1138,2,6204,8589,8754,10333,15556];
+const aprDates = ['Apr01','Apr02','Apr03','Apr04','Apr05','Apr06','Apr07','Apr08','Apr09','Apr10','Apr11','Apr12','Apr13','Apr14','Apr15','Apr16','Apr17','Apr18','Apr19','Apr20','Apr21','Apr22','Apr23','Apr24','Apr25','Apr26','Apr27','Apr28','Apr29','Apr30'];
+const aprVals = [9807,5491,5483,4943,5343,8776,7349,6523,13590,13022,14788,8501,7742,4833,5121,3177,3269,4760,4376,1417,445,3639,10986,10228,9141,10350,7830,8800,5851,6801];
+
+new Chart('c-daily-feb', { type:'line',
+  data:{
+    labels:[...febDates.map((_,i)=>i===0?'Feb 1':i===febDates.length-1?'Feb 28':''),...marDates.map((_,i)=>i===0?'Mar 1':i===marDates.length-1?'Mar 31':''),...aprDates.map((_,i)=>i===0?'Apr 1':i===aprDates.length-1?'Apr 30':'')],
+    datasets:[
+      {label:'Feb Spend',data:[...febVals,...Array(marVals.length+aprVals.length).fill(null)],borderColor:'rgba(78,159,216,0.8)',backgroundColor:'rgba(78,159,216,0.05)',tension:0.3,pointRadius:0,fill:true},
+      {label:'Mar Spend',data:[...Array(febVals.length).fill(null),...marVals,...Array(aprVals.length).fill(null)],borderColor:'rgba(232,148,58,0.8)',backgroundColor:'rgba(232,148,58,0.05)',tension:0.3,pointRadius:0,fill:true},
+      {label:'Apr Spend',data:[...Array(febVals.length+marVals.length).fill(null),...aprVals],borderColor:'rgba(62,191,130,0.8)',backgroundColor:'rgba(62,191,130,0.05)',tension:0.3,pointRadius:0,fill:true}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{x:scaleOpts,y:{...scaleOpts,title:{display:true,text:'Daily Spend (₹)'}}}}
+});
+
+// 13. Radar
+new Chart('c-radar', { type:'radar',
+  data:{
+    labels:['Reach','Lead Volume','SV Quality','ROAS','Cost Efficiency','Conv Rate'],
+    datasets:[
+      {label:'Meta Ads',data:[90,65,55,70,55,60],backgroundColor:'rgba(232,148,58,0.15)',borderColor:O,pointBackgroundColor:O},
+      {label:'Google Ads',data:[55,40,60,40,60,70],backgroundColor:'rgba(78,159,216,0.15)',borderColor:B,pointBackgroundColor:B}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{r:{grid:{color:'rgba(237,232,223,0.1)'},pointLabels:{color:'rgba(237,232,223,0.6)',font:{size:9}},ticks:{display:false},angleLines:{color:'rgba(237,232,223,0.08)'}}},
+    plugins:{legend:{position:'bottom'}}}
+});
+
+// 14. Google Monthly
+new Chart('c-goog-monthly', { type:'bar',
+  data:{labels:['Feb','Mar','Apr'],datasets:[{label:'Google Spend',data:[129935,70637,70979],backgroundColor:[B,B,B].map((c,i)=>i===0?c+'dd':c+'99'),borderRadius:4}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:scaleOpts,y:scaleOpts}}
+});
+
+// 15. Meta Monthly
+new Chart('c-meta-monthly', { type:'bar',
+  data:{labels:['Feb','Mar','Apr'],datasets:[{label:'Meta Spend',data:[183765,114769,141407],backgroundColor:[O,O,O].map((c,i)=>i===0?c+'dd':c+'99'),borderRadius:4}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:scaleOpts,y:scaleOpts}}
+});
+
+// 16. Platform %
+new Chart('c-plat-split', { type:'doughnut',
+  data:{labels:['Meta','Google'],datasets:[{data:[61.8,38.2],backgroundColor:[O,B],borderColor:'#1A1F28',borderWidth:3}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw}%`}}}}
+});
+
+// 17. Forecast Comparison
+new Chart('c-forecast-comp', { type:'bar',
+  data:{
+    labels:['Feb (Act)','Mar (Act)','Apr (Act)','May (Proj)','Jun/Raja (Proj)','Jul (Proj)'],
+    datasets:[
+      {label:'Ad Spend (₹)',data:[313700,185406,212386,350000,450000,400000],
+        backgroundColor:['rgba(78,159,216,0.6)','rgba(78,159,216,0.6)','rgba(78,159,216,0.6)','rgba(212,168,67,0.4)','rgba(212,168,67,0.7)','rgba(212,168,67,0.5)'],borderRadius:4}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{x:scaleOpts,y:{...scaleOpts,title:{display:true,text:'Spend (₹)'}}}}
+});
+
+// 18. 3 Scenarios
+new Chart('c-scenarios', { type:'bar',
+  data:{
+    labels:['Bear (ROAS 25x)','Base (ROAS 41.88x)','Bull (ROAS 60x)'],
+    datasets:[{label:'Revenue (₹)',data:[30000000,50256000,72000000],backgroundColor:[R,G,GR],borderRadius:6}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:scaleOpts,y:{...scaleOpts,title:{display:true,text:'Projected Revenue (₹)'}}}}
+});
+
+// 19. Q2 Budget Allocation
+new Chart('c-q2-budget', { type:'bar',
+  data:{
+    labels:['May 2026','June 2026 (Raja)','July 2026','Aug 2026 (I-Day)'],
+    datasets:[
+      {label:'Meta Ads (₹)',data:[175000,292500,220000,240000],backgroundColor:'rgba(232,148,58,0.75)',borderRadius:3},
+      {label:'Google Ads (₹)',data:[175000,157500,180000,160000],backgroundColor:'rgba(78,159,216,0.75)',borderRadius:3}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},
+    scales:{x:{stacked:true,...scaleOpts},y:{stacked:true,...scaleOpts,title:{display:true,text:'Budget (₹)'}}}}
+});
+</script>
+</body>
 </html>
